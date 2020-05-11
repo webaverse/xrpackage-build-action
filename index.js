@@ -16,7 +16,15 @@ cp.on('close', (code, signal) => {
 
   if (code === 0) {
     const src = path.join(process.env.GITHUB_WORKSPACE, process.env['INPUT_SRC']);
-    const ref = process.env['GITHUB_REF'] || '';
+    let ref = process.env['GITHUB_REF'] || '';
+    if (ref) {
+      const match = ref.match(/^\/refs\/tags\/(.+)$/);
+      if (match) {
+        ref = match[1];
+      } else {
+        ref = '';
+      }
+    }
     const sha = process.env['GITHUB_SHA'] || '';
     console.log('building', path.join('node_modules', '.bin', 'xrpk'), [
       'build',

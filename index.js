@@ -11,7 +11,7 @@ const cp = child_process.spawn('npm', [
 });
 cp.stdout.pipe(process.stdout);
 cp.stderr.pipe(process.stderr);
-cp.on('exit', (code, signal) => {
+cp.on('close', (code, signal) => {
   console.log('install done', code, signal);
 
   if (code === 0) {
@@ -24,15 +24,19 @@ cp.on('exit', (code, signal) => {
       'build',
       src,
     ]);
+    const bs = [];
     cp2.stdout.on('data', d => {
       bs.push(d);
     });
     cp2.stderr.pipe(process.stderr);
-    cp2.on('exit', (code, signal) => {
-      console.log('build done', code, signal);
+    cp2.on('close', (code, signal) => {
+      const b = Buffer.concat(bs);
+      const s = b.toString('utf8');
+      console.log('build done', {code, signal, s});
 
       if (code === 0) {
-        const dst = code + '';
+        const dst = s.match(/^(\S*)/)[1];
+        console.log('got dst', JSON.stringify(dst));
         process.stdout.write(`::set-output name=dst::${dst}\n`);
       } else {
         throw new Error(`invalid build status code: ${code}`);

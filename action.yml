@@ -1,5 +1,5 @@
-name: 'Build XRPackage'
-description: 'Build a WebXR XRPackage application from source'
+name: 'XRPackage Builder'
+description: 'Build a XRPackage application from source'
 author: 'GitHub'
 inputs:
   src:

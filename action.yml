@@ -3,7 +3,7 @@ description: 'Build a WebXR XRPackage application from source'
 author: 'GitHub'
 inputs:
   src:
-    description: 'Input directory path'
+    description: 'Input directory path relative to repository root'
     required: true
     default: '.'
   dst:

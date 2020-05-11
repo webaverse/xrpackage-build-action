@@ -18,7 +18,7 @@ cp.on('close', (code, signal) => {
     const src = path.join(process.env.GITHUB_WORKSPACE, process.env['INPUT_SRC']);
     let ref = process.env['GITHUB_REF'] || '';
     if (ref) {
-      const match = ref.match(/^\/refs\/tags\/(.+)$/);
+      const match = ref.match(/^refs\/tags\/(.+)$/);
       if (match) {
         ref = match[1];
       } else {

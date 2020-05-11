@@ -44,7 +44,7 @@ cp.on('close', (code, signal) => {
         if (ref) {
           process.stdout.write(`::set-output name=tag_name::${ref}\n`);
           process.stdout.write(`::set-output name=target_commitish::${sha}\n`);
-          process.stdout.write(`::set-output name=name::${tag} ${ref}\n`);
+          process.stdout.write(`::set-output name=name::${ref} ${ref}\n`);
         }
       } else {
         throw new Error(`invalid build status code: ${code}`);

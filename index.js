@@ -9,4 +9,7 @@ cp.stdout.pipe(process.stdout);
 cp.stderr.pipe(process.stderr);
 cp.on('exit', (code, signal) => {
   console.log('got code signal', code, signal);
+
+  const dst = code + '';
+  process.stdout.write(`::set-output name=dst::${dst}\n``);
 });

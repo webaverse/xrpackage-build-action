@@ -16,6 +16,8 @@ cp.on('close', (code, signal) => {
 
   if (code === 0) {
     const src = path.join(process.env.GITHUB_WORKSPACE, process.env['INPUT_SRC']);
+    const ref = process.env['GITHUB_REF'] || '';
+    const sha = process.env['GITHUB_SHA'] || '';
     console.log('building', path.join('node_modules', '.bin', 'xrpk'), [
       'build',
       src,
@@ -38,6 +40,12 @@ cp.on('close', (code, signal) => {
         const dst = s.match(/^(\S*)/)[1];
         console.log('got dst', JSON.stringify(dst));
         process.stdout.write(`::set-output name=dst::${dst}\n`);
+
+        if (ref) {
+          process.stdout.write(`::set-output name=tag_name::${ref}\n`);
+          process.stdout.write(`::set-output name=target_commitish::${sha}\n`);
+          process.stdout.write(`::set-output name=name::${tag} ${ref}\n`);
+        }
       } else {
         throw new Error(`invalid build status code: ${code}`);
       }

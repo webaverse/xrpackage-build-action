@@ -14,7 +14,7 @@ cp.stderr.pipe(process.stderr);
 cp.on('exit', (code, signal) => {
   console.log('install done', code, signal);
 
-  const src = process.env['INPUT_SRC'];
+  const src = path.join(process.env.GITHUB_WORKSPACE, process.env['INPUT_SRC']);
   console.log('building', path.join('node_modules', '.bin', 'xrpk'), [
     'build',
     src,

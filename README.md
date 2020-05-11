@@ -1,4 +1,4 @@
-# XRPackage Github Actions build
+# XRPackage Builder Github Action
 
 This Github Action lets you build and release [XRPackage](https://github.com/webaverse/xrpackage) apps.
 

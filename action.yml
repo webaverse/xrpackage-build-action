@@ -1,0 +1,15 @@
+name: 'Build XRPackage'
+description: 'Build a WebXR XRPackage application from source'
+author: 'GitHub'
+inputs:
+  src:
+    description: 'Input directory path'
+    required: true
+    default: '.'
+  dst:
+    description: 'Output file name'
+    required: true
+    default: 'a.wbn'
+runs:
+  using: 'node12'
+  main: 'index.js'

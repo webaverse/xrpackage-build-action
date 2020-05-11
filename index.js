@@ -41,6 +41,7 @@ cp.on('close', (code, signal) => {
         console.log('got dst', JSON.stringify(dst));
         process.stdout.write(`::set-output name=dst::${dst}\n`);
 
+        console.log('got ref', JSON.stringify(ref));
         if (ref) {
           process.stdout.write(`::set-output name=tag_name::${ref}\n`);
           process.stdout.write(`::set-output name=target_commitish::${sha}\n`);

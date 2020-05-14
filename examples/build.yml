@@ -1,0 +1,19 @@
+name: Build XRPackage
+
+on: [push]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Build package
+        id: build
+        uses: webaverse/xrpackage-build-action@v0.0.13
+        with:
+          src: '.'
+          dst: 'a.wbn'
+      - name: Echo build result
+        run: echo 'The output file is ${{ steps.build.outputs.dst }}; the release name is ${{ steps.build.outputs.name }}'

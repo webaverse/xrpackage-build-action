@@ -2,7 +2,18 @@
 
 This Github Action lets you build and release [XRPackage](https://github.com/webaverse/xrpackage) apps.
 
-To use it, make sure you have a valid XRPackage in the repository (e.g. by using `xrpk init`), then add a workflow file:
+To use it, first make sure you have a valid XRPackage in the repository. That basically means you have a `manifest.json` in the root.
+
+```
+{
+  "name": "My app",
+  "description": "Description for my app",
+  "xr_type": "webxr-site@0.0.1",
+  "start_url": "index.html"
+}
+```
+
+You can also generate a `manifest.json` by running `xrpk init`. Then, add the workflow file for the GitHub action:
 
 ## `.github/workflows/build.yml`
 

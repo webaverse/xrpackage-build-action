@@ -2,6 +2,13 @@
 
 This Github Action lets you build and release [XRPackage](https://github.com/webaverse/xrpackage) apps.
 
+- Every time you `git push`, it will verify that the app packages correctly
+- Every time you `git push` a new Git tag (e.g. new `npm version`), it will create a new Github Release in your repo
+
+That's it!
+
+## How to use
+
 To use it, first make sure you have a valid XRPackage in the repository. That basically means you have a `manifest.json` in the root.
 
 ```
@@ -15,7 +22,7 @@ To use it, first make sure you have a valid XRPackage in the repository. That ba
 
 You can also generate a `manifest.json` by running `xrpk init`. Then, add the workflow file for the GitHub action:
 
-## `.github/workflows/build.yml`
+### `.github/workflows/build.yml`
 
 This will only build your package, not release it.
 
@@ -41,7 +48,7 @@ jobs:
         run: echo 'The output file is ${{ steps.build.outputs.dst }}; the release name is ${{ steps.build.outputs.name }}'
 ```
 
-## `.github/workflows/release.yml`
+### `.github/workflows/release.yml`
 
 This will build _and_ release your package using Github Releases, if it was tagged in Git using semver (e.g. `v1.2.3`).
 
